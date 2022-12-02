@@ -54,3 +54,6 @@ public class NextFriday_AC {
         return EnteredDateNextFriday;
     }
 }
+
+//Execute this in annonymous Window
+//system.debug(JSON.serialize(NextFriday_AC.getFridays(2022,12)));
