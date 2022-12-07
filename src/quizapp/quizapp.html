@@ -1,0 +1,43 @@
+<template>
+    <lightning-card title="Quiz Component">
+        <div class="slds-m-around_medium">
+            <form>
+                <template for:each={myQuestions} for:item="quiz">
+                    <div key={quiz.id} class="slds-m-bottom_medium">
+                        <div><strong>{quiz.id} - {quiz.ques}</strong></div>
+                        <div class="slds-col slds-grid slds-p-around_small"
+                            style="font-size: 10px;font-family:Lucida Console;">
+                            <lightning-radio-group name={quiz.id} options={quiz.answers} value={quiz.choosenAnswer}
+                                type="radio" onchange={changeHandler} disabled={quiz.disabled}></lightning-radio-group>
+                        </div>
+                    </div>
+                </template>
+                <div if:true={isCorrect} style="padding-right: 70px;">
+                    <img src={correctimg} alt="User Image" style="width : 100px;margin-left: 155px;" />
+                    <p style="color: green;text-align: center;padding-left: 50px;">YOUR ANSWER IS CORRECT.</p>
+                </div>
+                <div if:true={isWrong} style="padding-right: 70px;">
+                    <img src={wrongimg} alt="User Image" style="width : 100px;margin-left: 170px;" />
+                    <p style="color: red;text-align: center;padding-left: 50px;">YOUR ANSWER IS WRONG.</p>
+                </div>
+                </br>
+                <lightning-layout style="padding-left: 100px;">
+                    <lightning-layout-item padding="around-small">
+                        <lightning-button variant="brand" type="submit" label="Result" title="Submit Quiz"
+                            disabled={allNotSelected} onclick={submitHandler} class="slds-m-around_small">
+                        </lightning-button>
+                    </lightning-layout-item>
+                    <lightning-layout-item padding="around-small">
+                        <lightning-button variant="brand" type="reset" label="Reset" title="Reset Quiz"
+                            onclick={resetHandler} class="slds-m-around_small"></lightning-button>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </form>
+            <template if:true={isSubmitted}>
+                <div class={isScoredFull} style="padding-left: 40px;"><strong>You have scored {correctAnswer} out of
+                        {myQuestions.length}</strong>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
